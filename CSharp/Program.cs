@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Backend.CountryDataProviders;
+using Backend.CountryServices;
+using Backend.Loggers;
+using Backend.PopulationServices;
+using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
@@ -11,16 +15,16 @@ namespace Backend
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Started");
-            Console.WriteLine("Getting DB Connection...");
+            GetCountryData();
+        }
 
-            IDbManager db = new SqliteDbManager();
-            DbConnection conn = db.getConnection();
-
-            if(conn == null)
-            {
-                Console.WriteLine("Failed to get connection");
-            }
+        private static async void GetCountryData()
+        {
+            RankingCountryService svc = new RankingCountryService(new ConsoleLogger());
+            svc.DataProviders.Add(new SqliteDataProvider());
+            svc.DataProviders.Add(new ConcreteStatDataProvider());
+            var res = await svc.GetCountries();
+            //Do something with the result
         }
     }
 }
