@@ -31,6 +31,11 @@ namespace Backend.PopulationServices
         /// <returns>Data for all known countries</returns>
         public async Task<List<Country>> GetCountries()
         {
+            if (DataProviders.Count == 0)
+            {
+                logger.LogError("No sources!");
+                return new List<Country>();
+            }
             Dictionary<string, Country> result = new Dictionary<string, Country>();
             List<Country> currentData;
             foreach (var dataProvider in DataProviders.AsEnumerable().Reverse()) 
