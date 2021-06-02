@@ -16,16 +16,16 @@ class GithubClient:
         res_json = response.json()
         #return User(**response.json()) #Easy solution, but won't work for other APIs and/or if the model becomes more complex
         user_dict = {
-            'username' : "github:{}".format(res_json['login']),
-            'avatar_url' : res_json.get('avatar_url', None),
-            'gravatar_id' : res_json.get('gravatar_id', None),
-            'name' : res_json.get('name', None),
-            'company' : res_json.get('company', None),
-            'blog' : res_json.get('blog', None),
-            'location' : res_json.get('location', None),
-            'email' : res_json.get('email', None),
-            'bio' : res_json.get('bio', None),
-            'twitter_username' : res_json.get('twitter_username', None),
-            'hireable' : res_json.get('hireable', None)
+            "username" : "github:{}".format(res_json["login"]),
+            "avatar_url" : res_json.get("avatar_url", None),
+            "gravatar_id" : res_json.get("gravatar_id", None),
+            "name" : res_json.get("name", None),
+            "company" : res_json.get("company", None),
+            "blog" : res_json.get("blog", None),
+            "location" : res_json.get("location", None),
+            "email" : res_json.get("email", None),
+            "bio" : res_json.get("bio", None),
+            "twitter_username" : res_json.get("twitter_username", None),
+            "hireable" : res_json.get("hireable", None)
         }
         return User(**user_dict)      

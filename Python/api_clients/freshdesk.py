@@ -22,7 +22,7 @@ class FreshdeskClient:
         if res_json.get("total", 0) == 0:
             return None
         
-        return res_json['results'][0]['id']
+        return res_json["results"][0]["id"]
 
     def create_or_update_contact(self, user):
         if not user.username:

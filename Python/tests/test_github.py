@@ -40,16 +40,16 @@ class GithubTest(unittest.TestCase):
             "updated_at": "2019-11-01T21:56:00Z"
         }
         with requests_mock.Mocker() as m:
-            m.get('https://api.github.com/users/testuser', json=mock_response)
+            m.get("https://api.github.com/users/testuser", json=mock_response)
             github_client = GithubClient("testuser", "doesntmatter")
             user_info = github_client.get_user_info()
             self.assertEqual(user_info.username, "github:defunkt")
 
     def test_get_user_info_404(self):
         with requests_mock.Mocker() as m:
-            m.get('https://api.github.com/users/testuser',status_code=404, reason="Mocked 404")# json=mock_response)
+            m.get("https://api.github.com/users/testuser",status_code=404, reason="Mocked 404")
             github_client = GithubClient("testuser", "doesntmatter")
             with self.assertRaises(HTTPError) as cm:
                 user_info = github_client.get_user_info()
-            self.assertEqual(str(cm.exception), '404 Client Error: Mocked 404 for url: https://api.github.com/users/testuser')
+            self.assertEqual(str(cm.exception), "404 Client Error: Mocked 404 for url: https://api.github.com/users/testuser")
 
